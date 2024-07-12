@@ -1,9 +1,11 @@
 import { ContactShadows, Environment, OrbitControls, Sky } from "@react-three/drei";
 import { Avatar } from "./Avatar";
 import { useControls } from "leva";
+import { Office } from "./Office";
 
-export const Experience = () => {
 
+{/* 
+  
   const { animation } = useControls({
     animation: {
       value: "Typing",
@@ -17,7 +19,7 @@ export const Experience = () => {
       <Environment preset="sunset" />
       <group position-y={-1}>
         <ContactShadows
-          opacity={0.40}
+          opacity={0.45}
           scale={10}
           blur={1}
           far={10}
@@ -35,7 +37,19 @@ export const Experience = () => {
           <planeGeometry />
           <meshStandardMaterial color="white" />
         </mesh>
-      </group>
+      </group> 
     </>
-  );
+  ); 
+  
+  */}
+
+export const Experience = () => {
+
+  return (
+    <>
+
+      <ambientLight intensity={1} />
+      <Office />
+    </>
+  )
 };
