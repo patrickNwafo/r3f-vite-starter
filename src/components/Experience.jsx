@@ -1,7 +1,7 @@
-import { ContactShadows, Environment, OrbitControls, Sky } from "@react-three/drei";
+import { ContactShadows, Environment, Float, MeshDistortMaterial, MeshWobbleMaterial, OrbitControls, Sky } from "@react-three/drei";
 import { Avatar } from "./Avatar";
-import { useControls } from "leva";
 import { Office } from "./Office";
+import { motion } from "framer-motion-3d"
 
 
 {/* 
@@ -43,13 +43,62 @@ import { Office } from "./Office";
   
   */}
 
-export const Experience = () => {
-
+export const Experience = (props) => {
+  const { section } = props;
   return (
     <>
-
       <ambientLight intensity={1} />
-      <Office />
+      <motion.group
+        position={[1.5, 2, 3]}
+        scale={[0.9, 0.9, 0.9]}
+        rotation-y={-Math.PI / 4}
+        animate={{
+          y: section === 0 ? 0 : -1,
+        }}>
+        <Office section={section} />
+      </motion.group>
+      <group position={[0, -1.5, -10]}>
+        <directionalLight position={[-5, 3, 5]} intensity={0.4} />
+        <Float>
+          <mesh position={[1, -3, -15]} scale={[2, 2, 2]}>
+            <sphereGeometry />
+            <MeshDistortMaterial
+              opacity={0.8}
+              transparent
+              distort={0.4}
+              speed={4}
+              color={"red"}
+            />
+          </mesh>
+        </Float>
+        <Float>
+          <mesh scale={[3, 3, 3]} position={[3, 1, -18]}>
+            <sphereGeometry />
+            <MeshDistortMaterial
+              opacity={0.8}
+              transparent
+              distort={1}
+              speed={5}
+              color={"yellow"}
+            />
+          </mesh>
+        </Float>
+        <Float>
+          <mesh scale={[1.4, 1.4, 1.4]} position={[-3, -1, -11]}>
+            <boxGeometry />
+            <MeshWobbleMaterial
+              opacity={0.8}
+              transparent
+              distort={1}
+              speed={5}
+              color={"blue"}
+            />
+          </mesh>
+        </Float>
+        <group scale={[2, 2, 2]} position-y={-1.5}>
+          <Avatar animate={section === 0 ? "Falling" : "Standing"} />
+        </group>
+      </group>
     </>
   )
 };
