@@ -1,4 +1,6 @@
-import { motion } from "framer-motion"
+import { motion } from "framer-motion";
+import React from 'react';
+
 const Section = (props) => {
     const { children } = props;
 
@@ -261,7 +263,7 @@ const ContactSection = () => {
             </h2>
             <div className=" mt-8 p-8 rounded-md bg-white w-96 max-w-full">
                 <form>
-                    <label for="name" className="font-medium text-gray-900 block mb-1">
+                    <label htmlFor="name" className="font-medium text-gray-900 block mb-1">
                         Name
                     </label>
                     <input
@@ -270,7 +272,7 @@ const ContactSection = () => {
                         id="name"
                         className=" block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-300 h-10"
                     />
-                    <label for="email" className="font-medium text-gray-900 block mb-1 mt-8">
+                    <label htmlFor="email" className="font-medium text-gray-900 block mb-1 mt-8">
                         Email
                     </label>
                     <input
@@ -279,7 +281,7 @@ const ContactSection = () => {
                         id="email"
                         className=" block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-300 h-10"
                     />
-                    <label for="email"
+                    <label htmlFor="email"
                         className="font-medium text-gray-900 block mb-1 mt-8">
                         Message
                     </label>

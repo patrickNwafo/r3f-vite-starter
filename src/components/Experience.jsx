@@ -1,50 +1,37 @@
-import { ContactShadows, Environment, Float, MeshDistortMaterial, MeshWobbleMaterial, OrbitControls, Sky } from "@react-three/drei";
+import {
+  Float,
+  MeshDistortMaterial,
+  MeshWobbleMaterial,
+} from "@react-three/drei";
+import { useFrame, useThree } from "@react-three/fiber";
+import { animate, useMotionValue } from "framer-motion";
+import { motion } from "framer-motion-3d";
+import { useEffect } from "react";
+import { framerMotionConfig } from "../config";
 import { Avatar } from "./Avatar";
 import { Office } from "./Office";
-import { motion } from "framer-motion-3d"
-
-
-{/* 
-  
-  const { animation } = useControls({
-    animation: {
-      value: "Typing",
-      options: ["Typing", "Falling", "Standing"]
-    },
-  })
-  return (
-    <>
-      <OrbitControls />
-      <Sky />
-      <Environment preset="sunset" />
-      <group position-y={-1}>
-        <ContactShadows
-          opacity={0.45}
-          scale={10}
-          blur={1}
-          far={10}
-          resolution={256}
-          color="#000000"
-        />
-        <Avatar animation={animation} />
-        {animation === "Typing" && (
-          <mesh scale={[0.8, 0.5, 0.8]} position-y={0.25}>
-            <boxGeometry />
-            <meshStandardMaterial color="red" />
-          </mesh>
-        )}
-        <mesh scale={5} rotation-x={-Math.PI * 0.5} position-={-0.001}>
-          <planeGeometry />
-          <meshStandardMaterial color="white" />
-        </mesh>
-      </group> 
-    </>
-  ); 
-  
-  */}
 
 export const Experience = (props) => {
-  const { section } = props;
+  const { section, menuOpened } = props;
+  const { viewport } = useThree();
+
+  const cameraPositionX = useMotionValue();
+  const cameraLookAtX = useMotionValue();
+
+  useEffect(() => {
+    animate(cameraPositionX, menuOpened ? -5 : 0, {
+      ...framerMotionConfig,
+    });
+    animate(cameraLookAtX, menuOpened ? 5 : 0, {
+      ...framerMotionConfig,
+    });
+  }, [menuOpened]);
+
+  useFrame((state) => {
+    state.camera.position.x = cameraPositionX.get();
+    state.camera.lookAt(cameraLookAtX.get(), 0, 0);
+  });
+
   return (
     <>
       <ambientLight intensity={1} />
@@ -54,10 +41,19 @@ export const Experience = (props) => {
         rotation-y={-Math.PI / 4}
         animate={{
           y: section === 0 ? 0 : -1,
-        }}>
+        }}
+      >
         <Office section={section} />
       </motion.group>
-      <group position={[0, -1.5, -10]}>
+
+      {/* SKILLS */}
+      <motion.group
+        position={[0, -1.5, -10]}
+        animate={{
+          z: section === 1 ? 0 : -10,
+          y: section === 1 ? -viewport.height : -1.5,
+        }}
+      >
         <directionalLight position={[-5, 3, 5]} intensity={0.4} />
         <Float>
           <mesh position={[1, -3, -15]} scale={[2, 2, 2]}>
@@ -79,7 +75,7 @@ export const Experience = (props) => {
               transparent
               distort={1}
               speed={5}
-              color={"yellow"}
+              color="yellow"
             />
           </mesh>
         </Float>
@@ -89,16 +85,16 @@ export const Experience = (props) => {
             <MeshWobbleMaterial
               opacity={0.8}
               transparent
-              distort={1}
+              factor={1}
               speed={5}
               color={"blue"}
             />
           </mesh>
         </Float>
         <group scale={[2, 2, 2]} position-y={-1.5}>
-          <Avatar animate={section === 0 ? "Falling" : "Standing"} />
+          <Avatar animation={section === 0 ? "Falling" : "Standing"} />
         </group>
-      </group>
+      </motion.group>
     </>
-  )
+  );
 };
