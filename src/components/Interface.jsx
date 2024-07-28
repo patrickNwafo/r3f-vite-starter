@@ -5,7 +5,7 @@ const Section = (props) => {
     const { children } = props;
 
     return (<motion.section className={`
-        h-screen w-screen p-8 max-w-screen-2xl mx-auto flex flex-col items-col items-start justify-center
+        h-screen w-screen p-8 max-w-screen-2xl mx-auto flex flex-col items-start justify-center
         `}
         initial={{
             opacity: 0,
@@ -16,7 +16,7 @@ const Section = (props) => {
             y: 0,
             transition: {
                 duration: 1,
-                delay: 0.5,
+                delay: 0.6,
             }
         }}
     >
@@ -49,7 +49,7 @@ const AboutSection = () => {
                 </span>
             </h1>
             <motion.p
-                className=" text-lg text-gray-600 mt-4"
+                className="w-60 text-lg text-gray-600 mt-4"
                 initial={{
                     opacity: 0,
                     y: 25,
@@ -63,9 +63,9 @@ const AboutSection = () => {
                     delay: 1.5,
                 }}
             >
-                A passionate Software Developer specializing in crafting immersive web applications and stunning 3D visuals.
+                A passionate Software Developer
                 <br />
-                Let's bring your ideas to life—reach out and let's create something amazing together!
+                <span className="w-24">Specializing in crafting immersive web applications and stunning 3D visuals.</span>
             </motion.p>
             <motion.button className={`bg-indigo-600 text-white py-4 px-8 rounded-lg font-bold text-lg mt-16`}
                 initial={{

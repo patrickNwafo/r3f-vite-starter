@@ -7,6 +7,7 @@ import { ScrollManager } from "./components/ScrollManager";
 import { Menu } from "./components/Menu";
 import { MotionConfig } from "framer-motion";
 import { Leva } from "leva";
+import { Cursor } from "./components/Cursor";
 
 function App() {
   const [section, setSection] = useState(0);
@@ -30,7 +31,7 @@ function App() {
           <ScrollControls pages={4} damping={0.1}>
             <ScrollManager section={section} onSectionChange={setSection} />
             <Scroll>
-              <Experience section={section} />
+              <Experience section={section} menuOpened={menuOpened} />
             </Scroll>
             <Scroll html>
               <Interface />
@@ -42,6 +43,7 @@ function App() {
           menuOpened={menuOpened}
           setMenuOpened={setMenuOpened}
         />
+        <Cursor />
       </MotionConfig>
       <Leva hidden />
     </>

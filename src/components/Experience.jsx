@@ -6,7 +6,7 @@ import {
 import { useFrame, useThree } from "@react-three/fiber";
 import { animate, useMotionValue } from "framer-motion";
 import { motion } from "framer-motion-3d";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { framerMotionConfig } from "../config";
 import { Avatar } from "./Avatar";
 import { Office } from "./Office";
@@ -14,6 +14,7 @@ import { Office } from "./Office";
 export const Experience = (props) => {
   const { section, menuOpened } = props;
   const { viewport } = useThree();
+
 
   const cameraPositionX = useMotionValue();
   const cameraLookAtX = useMotionValue();
@@ -31,6 +32,8 @@ export const Experience = (props) => {
     state.camera.position.x = cameraPositionX.get();
     state.camera.lookAt(cameraLookAtX.get(), 0, 0);
   });
+
+
 
   return (
     <>
@@ -91,7 +94,7 @@ export const Experience = (props) => {
             />
           </mesh>
         </Float>
-        <group scale={[2, 2, 2]} position-y={-1.5}>
+        <group scale={[2, 2, 2]} position-y={-1.5} >
           <Avatar animation={section === 0 ? "Falling" : "Standing"} />
         </group>
       </motion.group>
