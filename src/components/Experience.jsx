@@ -2,18 +2,24 @@ import {
   Float,
   MeshDistortMaterial,
   MeshWobbleMaterial,
+  useScroll,
 } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import { animate, useMotionValue } from "framer-motion";
 import { motion } from "framer-motion-3d";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { framerMotionConfig } from "../config";
 import { Avatar } from "./Avatar";
 import { Office } from "./Office";
+import * as THREE from 'three';
+import { Projects } from "./Projects";
 
 export const Experience = (props) => {
-  const { section, menuOpened } = props;
+  const { menuOpened } = props;
   const { viewport } = useThree();
+  const data = useScroll();
+
+  const [section, setSection] = useState(0)
 
 
   const cameraPositionX = useMotionValue();
@@ -28,15 +34,89 @@ export const Experience = (props) => {
     });
   }, [menuOpened]);
 
+  const characterContainerRef = useRef();
+
+  const [characterAnimation, setCharacterAnimation] = useState("Typing");
+
+  useEffect(() => {
+    setCharacterAnimation("Falling");
+    setTimeout(() => {
+      setCharacterAnimation(section === 0 ? "Typing" : "Standing");
+    }, 600)
+  }, [section])
+
+
   useFrame((state) => {
+
+    let curSection = Math.floor(data.scroll.current * data.pages);
+
+    if (curSection > 3) {
+      curSection = 3
+    }
+
+    if (curSection !== section) {
+      setSection(curSection);
+    }
+
     state.camera.position.x = cameraPositionX.get();
     state.camera.lookAt(cameraLookAtX.get(), 0, 0);
+
+    // const position = new THREE.Vector3();
+    // characterContainerRef.current.getWorldPosition(position)
+    // console.log([position.x, position.y, position.z])
+
+    // const quaternion = new THREE.Quaternion();
+    // characterContainerRef.current.getWorldQuaternion(quaternion);
+    // const euler = new THREE.Euler();
+    // euler.setFromQuaternion(quaternion, "XYZ");
+    // console.log(euler.x, euler.y, euler.z)
   });
 
 
 
   return (
     <>
+      <motion.group
+        position={[1.6743725322406027, 0.2466, 2.3865141566425514]}
+        rotation={[-3.1415926535897927, 1.4243981633974487, 3.1415926535897927]}
+        animate={"" + section}
+        transition={{
+          duration: 0.7,
+        }}
+        variants={{
+          0: {
+            scaleX: 0.9,
+            scaleY: 0.9,
+            scaleZ: 0.9,
+          },
+          1: {
+            y: -viewport.height + 0.5,
+            x: 0,
+            z: 7,
+            rotateX: 0,
+            rotateY: 0,
+            rotateZ: 0,
+          },
+          2: {
+            x: -2,
+            y: -viewport.height * 2 + 0.5,
+            z: 0,
+            rotateX: 0,
+            rotateY: Math.PI / 2,
+            rotateZ: 0,
+          },
+          3: {
+            y: -viewport.height * 3 + 1,
+            x: 0.3,
+            z: 8.5,
+            rotateX: 0,
+            rotateY: -Math.PI / 4,
+            rotateZ: 0,
+          }
+        }}
+      >
+        <Avatar animation={characterAnimation} />
+      </motion.group>
       <ambientLight intensity={1} />
       <motion.group
         position={[1.5, 2, 3]}
@@ -47,6 +127,14 @@ export const Experience = (props) => {
         }}
       >
         <Office section={section} />
+        <group
+          ref={characterContainerRef}
+          name="Empty"
+          position={[-0.345, 0.274, -0.619]} rotation={[-Math.PI, 0.639, -Math.PI]}
+        >
+
+
+        </group>
       </motion.group>
 
       {/* SKILLS */}
@@ -94,10 +182,9 @@ export const Experience = (props) => {
             />
           </mesh>
         </Float>
-        <group scale={[2, 2, 2]} position-y={-1.5} >
-          <Avatar animation={section === 0 ? "Falling" : "Standing"} />
-        </group>
+
       </motion.group>
+      <Projects />
     </>
   );
 };

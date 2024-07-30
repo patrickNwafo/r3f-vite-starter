@@ -11,44 +11,44 @@ import React, { useEffect } from "react";
 import * as THREE from "three";
 
 export function Office(props) {
-  const { section } = props;
-  const { nodes, materials } = useGLTF("models/scene.gltf");
-  const texture = useTexture("textures/baked.jpg");
+    const { section } = props;
+    const { nodes, materials } = useGLTF("models/scene.gltf");
+    const texture = useTexture("textures/baked.jpg");
 
 
 
 
-  texture.flipY = false;
-  texture.encoding = THREE.sRGBEncoding;
+    texture.flipY = false;
+    texture.encoding = THREE.sRGBEncoding;
 
-  const textureMaterial = new THREE.MeshStandardMaterial({
-    map: texture,
-    transparent: true,
-    opacity: 1,
-  });
-
-  const textureGlassMaterial = new THREE.MeshStandardMaterial({
-    map: texture,
-    transparent: true,
-    opacity: 0.42,
-  });
-
-  const textureOpacity = useMotionValue(0);
-  const glassTextureOpacity = useMotionValue(0);
-
-  useEffect(() => {
-    animate(textureOpacity, section === 0 ? 1 : 0, {
-      duration: 0.8,
+    const textureMaterial = new THREE.MeshStandardMaterial({
+        map: texture,
+        transparent: true,
+        opacity: 1,
     });
-    animate(glassTextureOpacity, section === 0 ? 0.42 : 0,  {
-      duration: 0.8,
-    });
-  }, [section]);
 
-  useFrame(() => {
-    textureMaterial.opacity = textureOpacity.get();
-    textureGlassMaterial.opacity = glassTextureOpacity.get();
-  });
+    const textureGlassMaterial = new THREE.MeshStandardMaterial({
+        map: texture,
+        transparent: true,
+        opacity: 0.42,
+    });
+
+    const textureOpacity = useMotionValue(0);
+    const glassTextureOpacity = useMotionValue(0);
+
+    useEffect(() => {
+        animate(textureOpacity, section === 0 ? 1 : 0, {
+            duration: 0.8,
+        });
+        animate(glassTextureOpacity, section === 0 ? 0.42 : 0, {
+            duration: 0.8,
+        });
+    }, [section]);
+
+    useFrame(() => {
+        textureMaterial.opacity = textureOpacity.get();
+        textureGlassMaterial.opacity = glassTextureOpacity.get();
+    });
 
     return (
         <group {...props} dispose={null}>
@@ -93,7 +93,7 @@ export function Office(props) {
                 <mesh name="mesh434900071_4" geometry={nodes.mesh434900071_4.geometry} material={textureMaterial} />
                 <mesh name="mesh434900071_5" geometry={nodes.mesh434900071_5.geometry} material={textureMaterial} />
             </motion.group>
-            <group name="keyboard" position={[-0.044, 0.981, -1.346]} rotation={[0, -0.165, 0]}>
+            <group position={[-0.049, 0.981, -1.289]} rotation={[0.016, -0.343, -0.06]} scale={0.601}>
                 <mesh name="mesh425587018" geometry={nodes.mesh425587018.geometry} material={textureMaterial} />
                 <mesh name="mesh425587018_1" geometry={nodes.mesh425587018_1.geometry} material={textureMaterial} />
                 <mesh name="mesh425587018_2" geometry={nodes.mesh425587018_2.geometry} material={textureMaterial} />
@@ -109,7 +109,7 @@ export function Office(props) {
                 <mesh name="iMac_1_1" geometry={nodes.iMac_1_1.geometry} material={textureMaterial} />
                 <mesh name="iMac_1_2" geometry={nodes.iMac_1_2.geometry} material={textureMaterial} />
             </motion.group>
-            <mesh name="Comp_Mouse" geometry={nodes.Comp_Mouse.geometry} material={textureMaterial} />
+            <mesh name="Comp_Mouse" geometry={nodes.Comp_Mouse.geometry} material={textureMaterial} position={[-0.295, 0, 0.02]} />
             <motion.group
                 scale={[0, 0, 0]}
                 animate={{
