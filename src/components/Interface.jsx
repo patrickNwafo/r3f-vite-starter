@@ -44,7 +44,7 @@ const AboutSection = (props) => {
     const { setSection } = props;
     return (
         <Section mobileTop>
-            <h1 className="text-4xl font-extrabold leading-snug md:text-6xl">
+            <h1 className="mt-8 text-4xl font-extrabold leading-snug md:text-6xl md:mt-0">
                 Hey there!
                 <br />
                 <span className="px-1 italic bg-white ">I'm Chinedu
@@ -71,7 +71,7 @@ const AboutSection = (props) => {
             </motion.p>
             <motion.button
                 onClick={() => setSection(3)}
-                className={`bg-indigo-600 text-white py-4 px-8 rounded-lg font-bold text-lg mt-16`}
+                className={`bg-indigo-600 text-white py-4 px-8 rounded-lg font-bold text-lg mt-4 md:mt-16`}
                 initial={{
                     opacity: 0,
                     y: 25,
@@ -165,13 +165,15 @@ const languages = [
 const SkillSection = () => {
     return (
         <Section>
-            <motion.div whileInView={"visible"}>
+            <motion.div
+                className="w-full"
+                whileInView={"visible"}>
                 <h2 className="text-3xl font-bold text-white md:text-5xl">Skills</h2>
                 <div className="mt-8 space-y-4 ">
                     {skills.map((skill, index) => (
-                        <div className="w-64" key={index}>
+                        <div className="w-full md:w-64" key={index}>
                             <motion.h3
-                                className="text-xl font-bold text-gray-300"
+                                className="text-lg font-bold text-gray-300 md:text-xl"
                                 initial={{
                                     opacity: 0,
                                 }}
@@ -210,12 +212,12 @@ const SkillSection = () => {
                     ))}
                 </div>
                 <div>
-                    <h2 className="mt-10 text-5xl font-bold text-white">Languages</h2>
+                    <h2 className="mt-10 text-3xl font-bold text-white md:text-5xl">Languages</h2>
                     <div className="mt-8 space-y-4 ">
                         {languages.map((lng, index) => (
-                            <div className="w-64" key={index}>
+                            <div className="w-full md:w-64" key={index}>
                                 <motion.h3
-                                    className="text-xl font-bold text-gray-300"
+                                    className="text-lg font-bold text-gray-300 md:text-xl"
                                     initial={{
                                         opacity: 0,
                                     }}
@@ -262,10 +264,10 @@ const SkillSection = () => {
 const ContactSection = () => {
     return (
         <Section>
-            <h2 className="text-5xl font-bold ">
+            <h2 className="text-3xl font-bold md:text-5xl ">
                 Contact me
             </h2>
-            <div className="max-w-full p-8 mt-8 bg-white rounded-md w-96">
+            <div className="max-w-full p-8 mt-8 bg-white bg-opacity-50 rounded-md w-96">
                 <form>
                     <label htmlFor="name" className="block mb-1 font-medium text-gray-900">
                         Name
@@ -321,7 +323,7 @@ const ProjectsSection = () => {
                 >
                     ← Previous
                 </button>
-                <h2 className="text-5xl font-bold text-white">Projects</h2>
+                <h2 className="text-3xl font-bold text-white md:text-5xl">Projects</h2>
                 <button
                     className="text-gray-300 transition-colors hover:text-indigo-600"
                     onClick={nextProject}

@@ -20,6 +20,10 @@ export const Experience = (props) => {
   const { viewport } = useThree();
   const data = useScroll();
 
+  const isMobile = window.innerWidth < 768;
+  const respomsiveRation = viewport.width / 12;
+  const officeScaleRatio = Math.max(0.5, Math.min(0.9 * respomsiveRation, 0.9))
+
   const [section, setSection] = useState(0)
 
 
@@ -46,6 +50,7 @@ export const Experience = (props) => {
     }, 600)
   }, [section])
 
+  const characterGroup = useRef();
 
   useFrame((state) => {
 
@@ -63,7 +68,10 @@ export const Experience = (props) => {
     state.camera.lookAt(cameraLookAtX.get(), 0, 0);
 
     // const position = new THREE.Vector3();
-    // characterContainerRef.current.getWorldPosition(position)
+    if (section === 0) {
+      characterContainerRef.current.getWorldPosition(characterGroup.current.position)
+    }
+
     // console.log([position.x, position.y, position.z])
 
     // const quaternion = new THREE.Quaternion();
@@ -79,53 +87,70 @@ export const Experience = (props) => {
     <>
       <Background />
       <motion.group
-        position={[1.6743725322406027, 0.2466, 2.3865141566425514]}
+        ref={characterGroup}
         rotation={[-3.1415926535897927, 1.4243981633974487, 3.1415926535897927]}
+        scale={[officeScaleRatio, officeScaleRatio, officeScaleRatio]}
         animate={"" + section}
         transition={{
           duration: 0.7,
         }}
         variants={{
           0: {
-            scaleX: 0.9,
-            scaleY: 0.9,
-            scaleZ: 0.9,
+            scaleX: officeScaleRatio,
+            scaleY: officeScaleRatio,
+            scaleZ: officeScaleRatio,
           },
           1: {
             y: -viewport.height + 0.5,
-            x: 0,
+            x: isMobile ? 0.3 : 0,
             z: 7,
             rotateX: 0,
-            rotateY: 0,
+            rotateY: isMobile ? -Math.PI / 2 : 0,
             rotateZ: 0,
+            scaleX: isMobile ? 1.5 : 1,
+            scaleY: isMobile ? 1.5 : 1,
+            scaleZ: isMobile ? 1.5 : 1,
           },
           2: {
-            x: -2,
+            x: isMobile ? -1.4 : -2,
             y: -viewport.height * 2 + 0.5,
             z: 0,
             rotateX: 0,
             rotateY: Math.PI / 2,
             rotateZ: 0,
+            scaleX: 1,
+            scaleY: 1,
+            scaleZ: 1,
           },
           3: {
             y: -viewport.height * 3 + 1,
-            x: 0.3,
+            x: 0.24,
             z: 8.5,
             rotateX: 0,
             rotateY: -Math.PI / 4,
             rotateZ: 0,
+            scaleX: 1,
+            scaleY: 1,
+            scaleZ: 1,
           }
         }}
       >
-        <Avatar animation={characterAnimation} />
+        <Avatar animation={characterAnimation} wireframe={section === 1} />
       </motion.group>
       <ambientLight intensity={1} />
       <motion.group
-        position={[1.5, 2, 3]}
-        scale={[0.9, 0.9, 0.9]}
+        position={[
+          isMobile ? 0 : 1.5 * officeScaleRatio,
+          isMobile ? -viewport.height / 6 : 2,
+          3,
+        ]}
+        scale={[officeScaleRatio, officeScaleRatio, officeScaleRatio]}
         rotation-y={-Math.PI / 4}
         animate={{
-          y: section === 0 ? 0 : -1,
+          y: isMobile ? -viewport.height / 6 : 0,
+        }}
+        transition={{
+          duration: 0.8,
         }}
       >
         <Office section={section} />
@@ -134,17 +159,15 @@ export const Experience = (props) => {
           name="Empty"
           position={[-0.345, 0.274, -0.619]} rotation={[-Math.PI, 0.639, -Math.PI]}
         >
-
-
         </group>
       </motion.group>
 
       {/* SKILLS */}
       <motion.group
-        position={[0, -1.5, -10]}
+        position={[0, isMobile ? -viewport.height : -1.5 * officeScaleRatio, -10]}
         animate={{
           z: section === 1 ? 0 : -10,
-          y: section === 1 ? -viewport.height : -1.5,
+          y: section === 1 ? -viewport.height : (isMobile ? -viewport.height : -1.5 * officeScaleRatio),
         }}
       >
         <directionalLight position={[-5, 3, 5]} intensity={0.4} />

@@ -263,7 +263,7 @@
   dependencies:
     "@stripe/stripe-js" "^1.35.0"
 
-"@formspree/react@^2.4.2":
+"@formspree/react@^2.5.1":
   version "2.5.1"
   resolved "https://registry.npmjs.org/@formspree/react/-/react-2.5.1.tgz"
   integrity sha512-Yhxyn32m3zH63i0DNpnBq55zargDlbihqC0wlK18dqU7GOUqJXKY+WywLXuTRGfqo79/hT+Qx6eFS6M0J6eh0A==
