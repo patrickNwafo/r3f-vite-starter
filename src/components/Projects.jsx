@@ -23,7 +23,7 @@ export const projects = [
         title: "Threejs Customizer",
         url: "https://threejscustomizer-rt.vercel.app/",
         image: "images/three.png",
-        description: "A SAAS product where users can design their T-shirt using a 3D-model, apply colors and textures to the model ask AI to help you generate stunning textures and save them to your gallery"
+        description: "A SAAS product where users can design, apply colors and textures, ask AI to help you generate textures and save them to your gallery"
     },
     {
         title: "Threejs Customizer",

@@ -4,10 +4,12 @@ import { useAtom } from "jotai";
 import { currentProjectAtom, projects } from "./Projects";
 
 const Section = (props) => {
-    const { children } = props;
+    const { children, mobileTop } = props;
 
-    return (<motion.section className={`
-        h-screen w-screen p-8 max-w-screen-2xl mx-auto flex flex-col items-start justify-center
+    return (<motion.section
+        className={`
+        h-screen w-screen p-8 max-w-screen-2xl mx-auto flex flex-col items-start
+        ${mobileTop ? " justify-start md:justify-center" : " justify-center"}
         `}
         initial={{
             opacity: 0,
@@ -26,10 +28,11 @@ const Section = (props) => {
     </motion.section>)
 }
 
-export const Interface = () => {
+export const Interface = (props) => {
+    const { setSection } = props;
     return (
         <div className="flex flex-col items-center w-screen">
-            <AboutSection />
+            <AboutSection setSection={setSection} />
             <SkillSection />
             <ProjectsSection />
             <ContactSection />
@@ -37,19 +40,18 @@ export const Interface = () => {
     )
 }
 
-const AboutSection = () => {
+const AboutSection = (props) => {
+    const { setSection } = props;
     return (
-
-
-        <Section>
-            <h1 className="text-6xl font-extrabold leading-snug">
-                Hey there!,
+        <Section mobileTop>
+            <h1 className="text-4xl font-extrabold leading-snug md:text-6xl">
+                Hey there!
                 <br />
-                <span className=" bg-white px-1 italic">I'm Chinedu
+                <span className="px-1 italic bg-white ">I'm Chinedu
                 </span>
             </h1>
             <motion.p
-                className="w-60 text-lg text-gray-600 mt-4"
+                className="mt-4 text-lg text-gray-300 w-60"
                 initial={{
                     opacity: 0,
                     y: 25,
@@ -67,7 +69,9 @@ const AboutSection = () => {
                 <br />
                 <span className="w-24">Specializing in crafting immersive web applications and stunning 3D visuals.</span>
             </motion.p>
-            <motion.button className={`bg-indigo-600 text-white py-4 px-8 rounded-lg font-bold text-lg mt-16`}
+            <motion.button
+                onClick={() => setSection(3)}
+                className={`bg-indigo-600 text-white py-4 px-8 rounded-lg font-bold text-lg mt-16`}
                 initial={{
                     opacity: 0,
                     y: 25,
@@ -162,12 +166,12 @@ const SkillSection = () => {
     return (
         <Section>
             <motion.div whileInView={"visible"}>
-                <h2 className="text-5xl font-bold">Skills</h2>
-                <div className=" mt-8 space-y-4">
+                <h2 className="text-3xl font-bold text-white md:text-5xl">Skills</h2>
+                <div className="mt-8 space-y-4 ">
                     {skills.map((skill, index) => (
                         <div className="w-64" key={index}>
                             <motion.h3
-                                className="text-xl font-bold text-gray-800"
+                                className="text-xl font-bold text-gray-300"
                                 initial={{
                                     opacity: 0,
                                 }}
@@ -183,7 +187,7 @@ const SkillSection = () => {
                             >
                                 {skill.title}
                             </motion.h3>
-                            <div className="h-2 w-full bg-gray-200 rounded-full mt-2">
+                            <div className="w-full h-2 mt-2 bg-gray-200 rounded-full">
                                 <motion.div
                                     className="h-full bg-indigo-500 rounded-full "
                                     style={{ width: `${skill.level}%` }}
@@ -206,12 +210,12 @@ const SkillSection = () => {
                     ))}
                 </div>
                 <div>
-                    <h2 className="text-5xl font-bold mt-10">Languages</h2>
-                    <div className=" mt-8 space-y-4">
+                    <h2 className="mt-10 text-5xl font-bold text-white">Languages</h2>
+                    <div className="mt-8 space-y-4 ">
                         {languages.map((lng, index) => (
                             <div className="w-64" key={index}>
                                 <motion.h3
-                                    className="text-xl font-bold text-gray-800"
+                                    className="text-xl font-bold text-gray-300"
                                     initial={{
                                         opacity: 0,
                                     }}
@@ -227,7 +231,7 @@ const SkillSection = () => {
                                 >
                                     {lng.title}
                                 </motion.h3>
-                                <div className="h-2 w-full bg-gray-200 rounded-full mt-2">
+                                <div className="w-full h-2 mt-2 bg-gray-200 rounded-full">
                                     <motion.div
                                         className="h-full bg-indigo-500 rounded-full "
                                         style={{ width: `${lng.level}%` }}
@@ -258,38 +262,38 @@ const SkillSection = () => {
 const ContactSection = () => {
     return (
         <Section>
-            <h2 className=" text-5xl font-bold ">
+            <h2 className="text-5xl font-bold ">
                 Contact me
             </h2>
-            <div className=" mt-8 p-8 rounded-md bg-white w-96 max-w-full">
+            <div className="max-w-full p-8 mt-8 bg-white rounded-md w-96">
                 <form>
-                    <label htmlFor="name" className="font-medium text-gray-900 block mb-1">
+                    <label htmlFor="name" className="block mb-1 font-medium text-gray-900">
                         Name
                     </label>
                     <input
                         type="text"
                         name="name"
                         id="name"
-                        className=" block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-300 h-10"
+                        className="block w-full h-10 text-gray-900 border-0 rounded-md shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-300"
                     />
-                    <label htmlFor="email" className="font-medium text-gray-900 block mb-1 mt-8">
+                    <label htmlFor="email" className="block mt-8 mb-1 font-medium text-gray-900">
                         Email
                     </label>
                     <input
                         type="email"
                         name="email"
                         id="email"
-                        className=" block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-300 h-10"
+                        className="block w-full h-10 text-gray-900 border-0 rounded-md shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-300"
                     />
                     <label htmlFor="email"
-                        className="font-medium text-gray-900 block mb-1 mt-8">
+                        className="block mt-8 mb-1 font-medium text-gray-900">
                         Message
                     </label>
                     <textarea
                         name="message"
                         id="message"
-                        className=" h-32 block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-300" />
-                    <button className="bg-indigo-600 text-white py-4 px-8 rounded-lg font-bold text-lg mt-16">
+                        className="block w-full h-32 text-gray-900 border-0 rounded-md shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-300" />
+                    <button className="px-8 py-4 mt-16 text-lg font-bold text-white bg-indigo-600 rounded-lg">
                         Submit
                     </button>
                 </form>
@@ -310,16 +314,16 @@ const ProjectsSection = () => {
     };
     return (
         <Section>
-            <div className="flex w-full h-full gap-8 items-center justify-center">
+            <div className="flex items-center justify-center w-full h-full gap-8">
                 <button
-                    className="hover:text-indigo-600 transition-colors"
+                    className="text-gray-300 transition-colors hover:text-indigo-600"
                     onClick={previousProject}
                 >
                     ← Previous
                 </button>
-                <h2 className="text-5xl font-bold">Projects</h2>
+                <h2 className="text-5xl font-bold text-white">Projects</h2>
                 <button
-                    className="hover:text-indigo-600 transition-colors"
+                    className="text-gray-300 transition-colors hover:text-indigo-600"
                     onClick={nextProject}
                 >
                     Next →

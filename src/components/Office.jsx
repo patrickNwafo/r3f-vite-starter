@@ -8,12 +8,14 @@ import { animate, useMotionValue } from "framer-motion";
 import { motion } from "framer-motion-3d";
 import React, { useEffect } from "react";
 
+
 import * as THREE from "three";
 
 export function Office(props) {
     const { section } = props;
     const { nodes, materials } = useGLTF("models/scene.gltf");
     const texture = useTexture("textures/baked.jpg");
+    const textureVscode = useVideoTexture("textures/vscode.mp4")
 
 
 
@@ -52,7 +54,18 @@ export function Office(props) {
 
     return (
         <group {...props} dispose={null}>
-            <group name="Desk" position={[-0.074, 0, -1.521]} rotation={[0, -Math.PI / 2, 0]}>
+            <mesh
+                name="Screen"
+                geometry={nodes.Screen.geometry}
+
+                position={[0.45, 0.94, -1.72]}
+                rotation={[Math.PI, -1.1, Math.PI]}
+            >
+                <meshBasicMaterial map={textureVscode} toneMapped={false} />
+            </mesh>
+            <group
+                name="Desk"
+                position={[-0.074, 0, -1.521]} rotation={[0, -Math.PI / 2, 0]}>
                 <mesh name="Plane001_Plane002_BlackWood001" geometry={nodes.Plane001_Plane002_BlackWood001.geometry} material={textureMaterial} />
                 <mesh name="Plane001_Plane002_BlackWood001_1" geometry={nodes.Plane001_Plane002_BlackWood001_1.geometry} material={textureMaterial} />
                 <mesh name="Plane001_Plane002_BlackWood001_2" geometry={nodes.Plane001_Plane002_BlackWood001_2.geometry} material={textureMaterial} />
@@ -105,7 +118,7 @@ export function Office(props) {
                     scale: section === 0 ? 1 : 0,
                 }}
                 name="iMac" position={[0.454, 0.939, -1.723]} rotation={[Math.PI, -1.099, Math.PI]}>
-                <mesh name="iMac_1" geometry={nodes.iMac_1.geometry} material={textureMaterial} />
+                {/*  <mesh name="iMac_1" geometry={nodes.iMac_1.geometry} material={textureMaterial} />*/}
                 <mesh name="iMac_1_1" geometry={nodes.iMac_1_1.geometry} material={textureMaterial} />
                 <mesh name="iMac_1_2" geometry={nodes.iMac_1_2.geometry} material={textureMaterial} />
             </motion.group>

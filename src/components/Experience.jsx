@@ -13,6 +13,7 @@ import { Avatar } from "./Avatar";
 import { Office } from "./Office";
 import * as THREE from 'three';
 import { Projects } from "./Projects";
+import { Background } from "./Background";
 
 export const Experience = (props) => {
   const { menuOpened } = props;
@@ -76,6 +77,7 @@ export const Experience = (props) => {
 
   return (
     <>
+      <Background />
       <motion.group
         position={[1.6743725322406027, 0.2466, 2.3865141566425514]}
         rotation={[-3.1415926535897927, 1.4243981633974487, 3.1415926535897927]}
