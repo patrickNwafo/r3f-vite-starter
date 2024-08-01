@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import React from 'react';
 import { useAtom } from "jotai";
 import { currentProjectAtom, projects } from "./Projects";
+import { useForm, ValidationError } from '@formspree/react';
 
 const Section = (props) => {
     const { children, mobileTop } = props;
@@ -261,44 +262,95 @@ const SkillSection = () => {
     );
 };
 
+
+
+function ContactForm() {
+    const [state, handleSubmit] = useForm("mwpeoqvg");
+    if (state.succeeded) {
+        return <p>Thanks for joining!</p>;
+    }
+    return (
+        <form onSubmit={handleSubmit}>
+            <label htmlFor="email">
+                Email Address
+            </label>
+            <input
+                id="email"
+                type="email"
+                name="email"
+            />
+            <ValidationError
+                prefix="Email"
+                field="email"
+                errors={state.errors}
+            />
+            <textarea
+                id="message"
+                name="message"
+            />
+            <ValidationError
+                prefix="Message"
+                field="message"
+                errors={state.errors}
+            />
+            <button type="submit" disabled={state.submitting}>
+                Submit
+            </button>
+        </form>
+    );
+}
+
 const ContactSection = () => {
+    const [state, handleSubmit] = useForm("mwpeoqvg");
     return (
         <Section>
             <h2 className="text-3xl font-bold md:text-5xl ">
                 Contact me
             </h2>
             <div className="max-w-full p-8 mt-8 bg-white bg-opacity-50 rounded-md w-96">
-                <form>
-                    <label htmlFor="name" className="block mb-1 font-medium text-gray-900">
-                        Name
-                    </label>
-                    <input
-                        type="text"
-                        name="name"
-                        id="name"
-                        className="block w-full h-10 text-gray-900 border-0 rounded-md shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-300"
-                    />
-                    <label htmlFor="email" className="block mt-8 mb-1 font-medium text-gray-900">
-                        Email
-                    </label>
-                    <input
-                        type="email"
-                        name="email"
-                        id="email"
-                        className="block w-full h-10 text-gray-900 border-0 rounded-md shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-300"
-                    />
-                    <label htmlFor="email"
-                        className="block mt-8 mb-1 font-medium text-gray-900">
-                        Message
-                    </label>
-                    <textarea
-                        name="message"
-                        id="message"
-                        className="block w-full h-32 text-gray-900 border-0 rounded-md shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-300" />
-                    <button className="px-8 py-4 mt-16 text-lg font-bold text-white bg-indigo-600 rounded-lg">
-                        Submit
-                    </button>
-                </form>
+                {state.succeeded ? (
+                    <p className="text-center text-gray-900">Thanks for your message</p>
+                ) : (
+                    <form onSubmit={handleSubmit}>
+                        <label htmlFor="name" className="block mb-1 font-medium text-gray-900">
+                            Name
+                        </label>
+                        <input
+                            type="text"
+                            name="name"
+                            id="name"
+                            className="block w-full h-10 text-gray-900 border-0 rounded-md shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-300"
+                        />
+                        <label htmlFor="email" className="block mt-8 mb-1 font-medium text-gray-900">
+                            Email
+                        </label>
+                        <input
+                            type="email"
+                            name="email"
+                            id="email"
+                            className="block w-full h-10 text-gray-900 border-0 rounded-md shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-300"
+                        />
+                        <ValidationError className="mt-1 font-semibold text-red-500"
+                            errors={state.errors}
+                        />
+                        <label htmlFor="email"
+                            className="block mt-8 mb-1 font-medium text-gray-900">
+                            Message
+                        </label>
+                        <textarea
+                            name="message"
+                            id="message"
+                            className="block w-full h-32 text-gray-900 border-0 rounded-md shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-300" />
+                        <ValidationError
+                            className="mt-1 font-semibold text-red-500"
+                            errors={state.errors}
+                        />
+                        <button className="px-8 py-4 mt-16 text-lg font-bold text-white bg-indigo-600 rounded-lg" disabled={state.submitting}>
+                            Submit
+                        </button>
+                    </form>
+                )}
+
             </div>
         </Section>
     )
