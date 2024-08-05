@@ -6,6 +6,7 @@ import { motion } from "framer-motion-3d";
 import { atom, useAtom } from "jotai";
 import { useEffect, useRef } from "react";
 
+
 export const projects = [
     {
         title: "Threejs Customizer",
@@ -14,27 +15,33 @@ export const projects = [
         description: "A SAAS product where users can design their T-shirt using a 3D-model, apply colors and textures to the model ask AI to help you generate stunning textures and save them to your gallery"
     },
     {
-        title: "Threejs Customizer",
-        url: "https://threejscustomizer-rt.vercel.app/",
-        image: "images/three.png",
+        title: "Fahmed",
+        url: "https://faahmeed.vercel.app/",
+        image: "images/fahmeed.png",
         description: "A SAAS product where users can design their T-shirt using a 3D-model, apply colors and textures to the model ask AI to help you generate stunning textures and save them to your gallery"
     },
     {
-        title: "Threejs Customizer",
-        url: "https://threejscustomizer-rt.vercel.app/",
-        image: "images/three.png",
+        title: "Goth Money",
+        url: "https://goth-money.vercel.app/",
+        image: "images/goth.png",
         description: "A SAAS product where users can design, apply colors and textures, ask AI to help you generate textures and save them to your gallery"
     },
     {
-        title: "Threejs Customizer",
-        url: "https://threejscustomizer-rt.vercel.app/",
-        image: "images/three.png",
+        title: "Amazon App",
+        url: "https://amazon-clone-3woo.vercel.app/",
+        image: "images/amazon.png",
         description: "A SAAS product where users can design their T-shirt using a 3D-model, apply colors and textures to the model ask AI to help you generate stunning textures and save them to your gallery"
     },
     {
-        title: "Threejs Customizer",
-        url: "https://threejscustomizer-rt.vercel.app/",
-        image: "images/three.png",
+        title: "Port",
+        url: "https://3d-portfolio-beta-ashen.vercel.app/",
+        image: "images/port.png",
+        description: "A SAAS product where users can design their T-shirt using a 3D-model, apply colors and textures to the model ask AI to help you generate stunning textures and save them to your gallery"
+    },
+    {
+        title: "Cara",
+        url: "https://3d-portfolio-beta-ashen.vercel.app/",
+        image: "images/port.png",
         description: "A SAAS product where users can design their T-shirt using a 3D-model, apply colors and textures to the model ask AI to help you generate stunning textures and save them to your gallery"
     },
 ];
@@ -69,10 +76,10 @@ const Project = (props) => {
                 position-y={0.3}
             />
             <Text
-                maxWidth={2}
+                maxWidth={4}
                 anchorX={"left"}
                 anchorY={"top"}
-                fontSize={0.2}
+                fontSize={0.1}
                 position={[-1, -0.4, 0]}
             >
                 {project.title.toUpperCase()}
@@ -81,7 +88,7 @@ const Project = (props) => {
                 maxWidth={2}
                 anchorX="left"
                 anchorY="top"
-                fontSize={0.1}
+                fontSize={0.08}
                 position={[-1, -0.6, 0]}
             >
                 {project.description}
