@@ -32,12 +32,12 @@ export const projects = [
         image: "images/dalle.png",
         description: "A Fullstack MERN AI image generation App with modern and minimal design, dynamic image layout, hover effect that showcases a users prompt to generate each ai image, their name and a download button search functionality, the ability to create new ai generated images by clicking the surprise me button or entering any text of your choice."
     },
-    {
-        title: "Fahmed",
-        url: "https://faahmeed.vercel.app/",
-        image: "images/fahmeed.png",
-        description: "A personal 3D website that provides an interactive experience, allowing users to explore the client's business in a dynamic and engaging way"
-    },
+    // {
+    //     title: "Fahmed",
+    //     url: "https://faahmeed.vercel.app/",
+    //     image: "images/fahmeed.png",
+    //     description: "A personal 3D website that provides an interactive experience, allowing users to explore the client's business in a dynamic and engaging way"
+    // },
 
     {
         title: "Amazon App",
