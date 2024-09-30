@@ -130,16 +130,8 @@ const skills = [
         level: 65,
     },
     {
-        title: "Redux",
-        level: 80,
-    },
-    {
         title: "MongoDB",
         level: 80,
-    },
-    {
-        title: "Git",
-        level: 90,
     },
     {
         title: "PostgreSQL",

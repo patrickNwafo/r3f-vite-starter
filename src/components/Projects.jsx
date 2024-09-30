@@ -15,10 +15,23 @@ export const projects = [
         description: "A SAAS product where users can design their T-shirt using a 3D-model, apply colors and textures to the model ask AI to help you generate stunning textures and save them to your gallery"
     },
     {
+        title: "Chat-With-PDF",
+        url: "https://chat-with-pdf-virid.vercel.app/",
+        image: "images/chat.png",
+        description: "A web app that lets users interact with PDFs via a chat interface, extracting key information and providing context-aware responses. Built with React, Node.js, MongoDB, and TailwindCSS, it integrates PDF parsing and NLP for accurate document insights."
+    },
+    {
         title: "Ontheside",
         url: "https://mentord.io/",
         image: "images/mentord.png",
         description: "A web application built to foster meaningful mentorship connections. It leverages powerful technologies to create a seamless and secure platform for both mentors and mentees."
+    },
+
+    {
+        title: "Dalle Clone",
+        url: "https://dall-e-rose-ten.vercel.app/",
+        image: "images/dalle.png",
+        description: "A Fullstack MERN AI image generation App with modern and minimal design, dynamic image layout, hover effect that showcases a users prompt to generate each ai image, their name and a download button search functionality, the ability to create new ai generated images by clicking the surprise me button or entering any text of your choice."
     },
     {
         title: "Goth Money",
@@ -26,18 +39,6 @@ export const projects = [
         image: "images/goth.png",
         description: "An innovative 3D visualization project created using Three.js, React-Three-Fiber, and Blender. This immersive web experience combines cutting-edge technologies with dynamic animations to create a unique and engaging user interface."
     },
-    {
-        title: "Dalle Clone",
-        url: "https://dall-e-rose-ten.vercel.app/",
-        image: "images/dalle.png",
-        description: "A Fullstack MERN AI image generation App with modern and minimal design, dynamic image layout, hover effect that showcases a users prompt to generate each ai image, their name and a download button search functionality, the ability to create new ai generated images by clicking the surprise me button or entering any text of your choice."
-    },
-    // {
-    //     title: "Fahmed",
-    //     url: "https://faahmeed.vercel.app/",
-    //     image: "images/fahmeed.png",
-    //     description: "A personal 3D website that provides an interactive experience, allowing users to explore the client's business in a dynamic and engaging way"
-    // },
 
     {
         title: "Amazon App",
